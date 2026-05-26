@@ -1,1 +1,1 @@
-console.log("Navbar Loaded Successfully");
+console.log("Navbar Loaded Successfully!");
