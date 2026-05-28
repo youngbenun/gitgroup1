@@ -88,3 +88,16 @@ body.dark-mode .filters button {
 body.dark-mode .filters button.active {
   background: #8222f3;
 }
+
+body.dark-mode input {
+  background: #2a2a2a;
+  color: white;
+  border: 1px solid #555;
+}
+
+body.dark-mode .btn,
+body.dark-mode .todo-form button,
+body.dark-mode .delete-btn {
+  background: #8222f3;
+  color: white;
+}
