@@ -74,3 +74,17 @@ body.dark-mode .about-page {
   padding: 20px;
   border-radius: 16px;
 }
+
+body.dark-mode .todo-item {
+  background: #2a2a2a;
+}
+
+body.dark-mode .filters button {
+  background: #2a2a2a;
+  color: white;
+}
+
+
+body.dark-mode .filters button.active {
+  background: #8222f3;
+}
