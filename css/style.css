@@ -56,3 +56,8 @@ body {
 .theme-btn:hover {
   opacity: 0.9;
 }
+
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
