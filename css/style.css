@@ -61,3 +61,16 @@ body.dark-mode {
   background: #121212;
   color: #ffffff;
 }
+
+body.dark-mode .navbar {
+  background: #1e1e1e;
+}
+
+body.dark-mode .hero,
+body.dark-mode .todo-box,
+body.dark-mode .about-page {
+  background: #1e1e1e;
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+}
