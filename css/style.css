@@ -40,3 +40,19 @@ body {
   text-decoration: none;
   border-radius: 10px;
 }
+
+/*Karelle Feature DARK MODE*/
+
+.theme-btn {
+  background: #8222f3;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.theme-btn:hover {
+  opacity: 0.9;
+}
