@@ -40,3 +40,64 @@ body {
   text-decoration: none;
   border-radius: 10px;
 }
+
+/*Karelle Feature DARK MODE*/
+
+.theme-btn {
+  background: #8222f3;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.theme-btn:hover {
+  opacity: 0.9;
+}
+
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .navbar {
+  background: #1e1e1e;
+}
+
+body.dark-mode .hero,
+body.dark-mode .todo-box,
+body.dark-mode .about-page {
+  background: #1e1e1e;
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+body.dark-mode .todo-item {
+  background: #2a2a2a;
+}
+
+body.dark-mode .filters button {
+  background: #2a2a2a;
+  color: white;
+}
+
+
+body.dark-mode .filters button.active {
+  background: #8222f3;
+}
+
+body.dark-mode input {
+  background: #2a2a2a;
+  color: white;
+  border: 1px solid #555;
+}
+
+body.dark-mode .btn,
+body.dark-mode .todo-form button,
+body.dark-mode .delete-btn {
+  background: #8222f3;
+  color: white;
+}
