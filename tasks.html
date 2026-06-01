@@ -1,67 +1,71 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Tasks</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="./css/style.css" />
-  <link rel="stylesheet" href="./css/navbar.css" />
-  <link rel="stylesheet" href="./css/tasks.css" />
-</head>
-<body>
+    <title>bla bla bla</title>
 
-  <nav class="navbar">
-    <div class="logo">Todo App</div>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/navbar.css" />
+    <link rel="stylesheet" href="./css/tasks.css" />
+  </head>
 
-    <ul class="nav-links">
-      <li><a href="./index.html">בית</a></li>
-      <li><a href="./tasks.html">משימות</a></li>
-      <li><a href="./about.html">אודות</a></li>
-    </ul>
-  </nav>
+  <body>
 
-  <main class="container">
+    <nav class="navbar">
+      <div class="logo">Todo App</div>
 
-    <div class="todo-box">
+      <ul class="nav-links">
+        <li><a href="./index.html">בית</a></li>
+        <li><a href="./tasks.html">משימות</a></li>
+        <li><a href="./about.html">אודות</a></li>
+      </ul>
 
-      <h1>רשימת משימות</h1>
+      <button id="themeToggle" class="theme-btn">
+        🌙
+      </button>
+    </nav>
 
-      <form id="todoForm" class="todo-form">
-        <input
-          id="todoInput"
-          type="text"
-          placeholder="הוסף משימה..."
-        />
+    <main class="container">
 
-        <button type="submit">
-          הוסף
-        </button>
-      </form>
+      <div class="todo-box">
 
-      <div class="filters">
-        <button data-filter="all" class="active">
-          הכל
-        </button>
+        <h1>רשימת משימות</h1>
 
-        <button data-filter="active">
-          פתוחות
-        </button>
+        <form id="todoForm" class="todo-form">
+          <input id="todoInput" type="text" placeholder="הוסף משימה..." />
 
-        <button data-filter="completed">
-          הושלמו
-        </button>
+          <button type="submit">
+            הוסף
+          </button>
+        </form>
+
+        <div class="filters">
+          <button data-filter="all" class="active">
+            הכל
+          </button>
+
+          <button data-filter="active">
+            פתוחות
+          </button>
+
+          <button data-filter="completed">
+            הושלמו
+          </button>
+        </div>
+
+        <ul id="todoList" class="todo-list"></ul>
+
       </div>
 
-      <ul id="todoList" class="todo-list"></ul>
+    </main>
 
-    </div>
+    <script src="./js/storage.js"></script>
+    <script src="./js/tasks.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/darkmode.js"></script>
+  </body>
 
-  </main>
-
-  <script src="./js/storage.js"></script>
-  <script src="./js/tasks.js"></script>
-  <script src="./js/navbar.js"></script>
-</body>
 </html>

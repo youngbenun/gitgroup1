@@ -4,6 +4,10 @@
 }
 
 .todo-box h1 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: -0.3px;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -16,18 +20,36 @@
 
 .todo-form input {
   flex: 1;
-  padding: 14px;
-  border: 2px solid #ddd;
-  border-radius: 10px;
+  padding: 14px 18px;
+  border: 2px solid #e2deff;
+  border-radius: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.todo-form input:focus {
+  border-color: #8222f3;
 }
 
 .todo-form button {
-  padding: 14px 20px;
+  padding: 14px 22px;
   border: none;
   background: #8222f3;
   color: white;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 4px 12px rgba(130, 34, 243, 0.25);
+}
+
+.todo-form button:hover {
+  background: #6f17d9;
+  transform: translateY(-1px);
 }
 
 .filters {
@@ -43,6 +65,10 @@
   background: white;
   border-radius: 10px;
   cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .filters button.active {
@@ -56,31 +82,45 @@
 
 .todo-item {
   background: white;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 16px 20px;
+  border-radius: 14px;
   margin-bottom: 10px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(45, 0, 95, 0.06);
+}
+
+.todo-item:hover {
+  box-shadow: 0 4px 14px rgba(45, 0, 95, 0.1);
 }
 
 .todo-content {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-size: 15px;
 }
 
 .completed {
   text-decoration: line-through;
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .delete-btn {
   background: #e832f0;
   border: none;
   color: white;
-  padding: 10px 14px;
+  padding: 8px 14px;
   border-radius: 10px;
   cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #c41fd0;
 }
