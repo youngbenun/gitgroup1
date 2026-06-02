@@ -23,7 +23,7 @@ function renderTodos() {
   todoList.innerHTML = "";
   
   // Modification for simulate conflict
-  console.log("Rendering tasks updated by karelle");
+  console.log("Rendering tasks updated by Karelle");
 
   const filteredTodos = todos.filter((todo) => {
 
