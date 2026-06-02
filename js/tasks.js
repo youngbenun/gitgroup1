@@ -9,6 +9,9 @@ let currentFilter = "all";
 
 function renderTodos() {
   todoList.innerHTML = "";
+  
+  // NEW FEATURE BY TEAM
+  console.log("Rendering tasks updated by team");
 
   const filteredTodos = todos.filter((todo) => {
 
