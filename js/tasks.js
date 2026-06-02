@@ -7,11 +7,23 @@ const filterButtons = document.querySelectorAll(".filters button");
 let todos = getTodos();
 let currentFilter = "all";
 
+function updateStats() {
+  const total = todos.length;
+  const completed = todos.filter(t => t.completed).length;
+  const active = total - completed;
+
+  document.getElementById("taskStats").innerHTML = `
+    <p>Total tasks: ${total}</p>
+    <p>Completed: ${completed}</p>
+    <p>Active: ${active}</p>
+  `;
+}
+
 function renderTodos() {
   todoList.innerHTML = "";
   
-  // NEW FEATURE BY TEAM
-  console.log("Rendering tasks updated by team !");
+  // Modification for simulate conflict
+  console.log("Rendering tasks updated by Karelle");
 
   const filteredTodos = todos.filter((todo) => {
 
@@ -57,6 +69,7 @@ function renderTodos() {
 
     todoList.appendChild(li);
   });
+  updateStats();
 }
 
 function addTodo(text) {
