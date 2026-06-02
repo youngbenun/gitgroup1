@@ -128,3 +128,10 @@ body.dark-mode .delete-btn {
   background: #8222f3;
   color: white;
 }
+
+.stats {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
