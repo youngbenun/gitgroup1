@@ -11,98 +11,121 @@ function renderTodos() {
   todoList.innerHTML = "";
 
   const filteredTodos = todos.filter((todo) => {
+    // בלשונית "פתוחות" - נציג רק משימות שלא סומנו ב-V ולא אורכבו
     if (currentFilter === "active") {
-      return !todo.completed;
+      return !todo.completed && !todo.archived;
     }
+
+    // בלשונית "הושלמו" - נציג משימות שסומנו כהושלמו ונוקו (עברו ארכוב)
     if (currentFilter === "completed") {
-      return todo.completed;
+      return todo.archived;
     }
-    return true;
+
+    // בלשונית "הכל" - נציג את כל המשימות השוטפות שעוד לא אורכבו
+    return !todo.archived;
   });
 
   filteredTodos.forEach((todo) => {
     const li = document.createElement("li");
     li.className = "todo-item";
 
-    li.innerHTML = `
-      <div class="todo-content">
-        <input
-          type="checkbox"
-          ${todo.completed ? "checked" : ""}
-          onchange="toggleTodo(${todo.id})"
-        />
-        <span class="${todo.completed ? "completed" : ""}">
-          ${todo.text}
-        </span>
-      </div>
-      <div style="display: flex; gap: 8px;">
-        <button
-          class="delete-btn"
-          style="background: #8222f3;" 
-          onclick="editTodo(${todo.id})"
-        >
-          ערוך
-        </button>
+    // אם המשימה כבר בארכיון (הושלמה ונוקתה), לא נציג לה כפתור עריכה או צ'קבוקס
+    if (todo.archived) {
+      li.innerHTML = `
+        <div class="todo-content">
+          <span class="completed" style="opacity: 0.6;">
+            ✔️ ${todo.text}
+          </span>
+        </div>
         <button
           class="delete-btn"
           onclick="deleteTodo(${todo.id})"
         >
-          מחק
+          מחק לתמיד
         </button>
-      </div>
-    `;
+      `;
+    } else {
+      // משימה רגילה (פעילה או מסומנת ב-V זמני)
+      li.innerHTML = `
+        <div class="todo-content">
+          <input
+            type="checkbox"
+            ${todo.completed ? "checked" : ""}
+            onchange="toggleTodo(${todo.id})"
+          />
+          <span class="${todo.completed ? "completed" : ""}">
+            ${todo.text}
+          </span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button
+            class="delete-btn"
+            style="background: #8222f3;" 
+            onclick="editTodo(${todo.id})"
+          >
+            ערוך
+          </button>
+          <button
+            class="delete-btn"
+            onclick="deleteTodo(${todo.id})"
+          >
+            מחק
+          </button>
+        </div>
+      `;
+    }
 
     todoList.appendChild(li);
   });
 
-  // הוספת כפתור "סיום" גלובלי אם יש משימות מסומנות
+  // מציג את כפתור הסיום רק אם המשתמש נמצא בלשונית שלא מציגה כבר את הארכיון
   renderDoneButton();
 }
 
-// פונקציה חדשה: מציגה כפתור "סיום" למטה שמנקה את המשימות שהושלמו
 function renderDoneButton() {
-  // בדיקה אם קיים כבר כפתור כזה כדי לא לשכפל אותו
   const existingDoneBtn = document.getElementById("clearCompletedBtn");
   if (existingDoneBtn) {
     existingDoneBtn.remove();
   }
 
-  // בודקים אם יש לפחות משימה אחת מסומנת כ"הושלמה"
-  const hasCompleted = todos.some(todo => todo.completed);
+  // בודקים אם יש משימות שסומנו ב-V אבל עדיין לא אורכבו
+  const hasCompletedText = todos.some(todo => todo.completed && !todo.archived);
 
-  if (hasCompleted) {
+  // נציג את הכפתור רק אם יש משימות מסומנות ואנחנו לא בלשונית "הושלמו"
+  if (hasCompletedText && currentFilter !== "completed") {
     const doneBtn = document.createElement("button");
     doneBtn.id = "clearCompletedBtn";
     doneBtn.className = "delete-btn";
     doneBtn.style.width = "100%";
     doneBtn.style.marginTop = "20px";
     doneBtn.style.padding = "14px";
-    doneBtn.style.background = "#2d005f"; // צבע כהה שמתאים לניובר
-    doneBtn.innerText = "סיום (נקה משימות שנבחרו)";
+    doneBtn.style.background = "#2d005f"; 
+    doneBtn.innerText = "סיום (העבר משימות שנבחרו ל-'הושלמו')";
     
-    doneBtn.onclick = clearCompletedTodos;
+    doneBtn.onclick = archiveCompletedTodos;
     
-    // מחברים את הכפתור מתחת לרשימה בתוך ה-todo-box
     document.querySelector(".todo-box").appendChild(doneBtn);
   }
 }
 
-// פונקציה חדשה: מוחקת את כל המשימות המסומנות
-function clearCompletedTodos() {
-  todos = todos.filter(todo => !todo.completed);
+// במקום למחוק - הפונקציה הזו מעבירה את המשימות למצב ארכיון (archived)
+function archiveCompletedTodos() {
+  todos = todos.map(todo => {
+    if (todo.completed) {
+      return { ...todo, archived: true };
+    }
+    return todo;
+  });
   saveTodos(todos);
   renderTodos();
 }
 
-// פונקציה חדשה: עריכת משימה קיימת
 function editTodo(id) {
   const todoToEdit = todos.find(todo => todo.id === id);
-  if (!todoToEdit) return;
+  if (!todoToEdit || todoToEdit.archived) return;
 
-  // פתיחת חלונית קלט פשוטה של הדפדפן עם הטקסט הנוכחי
   const newText = prompt("ערוך את המשימה:", todoToEdit.text);
 
-  // בדיקה שהמשתמש לא לחץ ביטול ושאינו ריק
   if (newText !== null && newText.trim() !== "") {
     todoToEdit.text = newText.trim();
     saveTodos(todos);
@@ -115,6 +138,7 @@ function addTodo(text) {
     id: Date.now(),
     text,
     completed: false,
+    archived: false, // שדה חדש שמסמן האם המשימה הועברה להיסטוריית המושלמות
   };
 
   todos.push(newTodo);
