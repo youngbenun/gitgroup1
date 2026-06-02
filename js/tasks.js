@@ -22,8 +22,8 @@ function updateStats() {
 function renderTodos() {
   todoList.innerHTML = "";
   
-  // NEW FEATURE BY TEAM
-  console.log("Rendering tasks updated by team");
+  // Modification for simulate conflict
+  console.log("Rendering tasks updated by karelle");
 
   const filteredTodos = todos.filter((todo) => {
 
