@@ -11,17 +11,14 @@ function renderTodos() {
   todoList.innerHTML = "";
 
   const filteredTodos = todos.filter((todo) => {
-    // בלשונית "פתוחות" - נציג רק משימות שלא סומנו ב-V ולא אורכבו
     if (currentFilter === "active") {
       return !todo.completed && !todo.archived;
     }
 
-    // בלשונית "הושלמו" - נציג משימות שסומנו כהושלמו ונוקו (עברו ארכוב)
     if (currentFilter === "completed") {
       return todo.archived;
     }
 
-    // בלשונית "הכל" - נציג את כל המשימות השוטפות שעוד לא אורכבו
     return !todo.archived;
   });
 
@@ -29,7 +26,6 @@ function renderTodos() {
     const li = document.createElement("li");
     li.className = "todo-item";
 
-    // אם המשימה כבר בארכיון (הושלמה ונוקתה), לא נציג לה כפתור עריכה או צ'קבוקס
     if (todo.archived) {
       li.innerHTML = `
         <div class="todo-content">
@@ -45,7 +41,6 @@ function renderTodos() {
         </button>
       `;
     } else {
-      // משימה רגילה (פעילה או מסומנת ב-V זמני)
       li.innerHTML = `
         <div class="todo-content">
           <input
@@ -78,7 +73,6 @@ function renderTodos() {
     todoList.appendChild(li);
   });
 
-  // מציג את כפתור הסיום רק אם המשתמש נמצא בלשונית שלא מציגה כבר את הארכיון
   renderDoneButton();
 }
 
@@ -88,10 +82,8 @@ function renderDoneButton() {
     existingDoneBtn.remove();
   }
 
-  // בודקים אם יש משימות שסומנו ב-V אבל עדיין לא אורכבו
   const hasCompletedText = todos.some(todo => todo.completed && !todo.archived);
 
-  // נציג את הכפתור רק אם יש משימות מסומנות ואנחנו לא בלשונית "הושלמו"
   if (hasCompletedText && currentFilter !== "completed") {
     const doneBtn = document.createElement("button");
     doneBtn.id = "clearCompletedBtn";
@@ -108,7 +100,6 @@ function renderDoneButton() {
   }
 }
 
-// במקום למחוק - הפונקציה הזו מעבירה את המשימות למצב ארכיון (archived)
 function archiveCompletedTodos() {
   todos = todos.map(todo => {
     if (todo.completed) {
@@ -138,7 +129,7 @@ function addTodo(text) {
     id: Date.now(),
     text,
     completed: false,
-    archived: false, // שדה חדש שמסמן האם המשימה הועברה להיסטוריית המושלמות
+    archived: false,
   };
 
   todos.push(newTodo);
